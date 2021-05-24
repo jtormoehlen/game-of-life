@@ -1,5 +1,7 @@
 package controller;
 
+import core.GOL;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,9 +10,20 @@ import java.awt.event.MouseListener;
  */
 public class GOLListener implements MouseListener {
 
+    GOL gol;
+
+    public GOLListener(GOL gol) {
+        this.gol = gol;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("x: " + e.getX() + " | y: " + e.getY());
+
+        int xWorld = gol.worldValueToArrayValue(e.getX());
+        int yWorld = gol.worldValueToArrayValue(e.getY());
+
+        gol.toggleCell(xWorld, yWorld);
     }
 
     @Override

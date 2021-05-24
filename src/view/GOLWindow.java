@@ -2,29 +2,23 @@ package view;
 
 import core.GOL;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  * Created by jtormoehlen on 16.03.2020.
  */
-public class GOLWindow extends Frame {
+public class GOLWindow extends JPanel {
 
-    private GOL gol;
-    private int offset;
-    private int scale;
+    GOL gol;
+    int offset;
+    int scale;
 
     public GOLWindow(GOL gol) {
-        setSize(1024, 768);
+        setSize(600, 480);
 
-        addWindowListener( new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) { System.exit( 0 ); }
-        } );
-
-        offset = 50;
-        scale = 15;
+        offset = gol.OFFSET;
+        scale = gol.SCALE;
         this.gol = gol;
     }
 
@@ -35,9 +29,15 @@ public class GOLWindow extends Frame {
             for (int j = 0; j < gol.getPop().length; j++) {
 
                 if (gol.getPop()[i][j]) {
-                    g.fillRect((i * scale) + offset, (j * scale) + offset, scale, scale);
+                    paintCell(g, i, j);
                 }
+
+                g.drawRect((i * scale) + offset, (j * scale) + offset, scale, scale);
             }
         }
+    }
+
+    private void paintCell(Graphics g, int x, int y) {
+        g.fillRect((x * scale) + offset, (y * scale) + offset, scale, scale);
     }
 }

@@ -5,18 +5,17 @@ package core;
  */
 public class GOL implements GameOfLife {
 
+    public final int OFFSET = 100;
+    public final int SCALE = 10;
+
     private boolean[][] pop;
 
     public void initPop(int size) {
         pop = new boolean[size][size];
     }
 
-    public void actCell(int x, int y) {
-        pop[x][y] = true;
-    }
-
-    public void deactCell(int x, int y) {
-        pop[x][y] = false;
+    public void toggleCell(int x, int y) {
+        pop[x][y] = !pop[x][y];
     }
 
     public int getNeighborCount(int x, int y) {
@@ -102,6 +101,10 @@ public class GOL implements GameOfLife {
         }
 
         return true;
+    }
+
+    public int worldValueToArrayValue(int worldValue) {
+        return (worldValue - OFFSET) / SCALE;
     }
 
     public void printPop() {

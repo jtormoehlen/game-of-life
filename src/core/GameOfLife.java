@@ -7,6 +7,8 @@ public interface GameOfLife {
 
     void initPop(int size);
 
+    void toggleCell(int x, int y);
+
     int getNeighborCount(int x, int y);
 
     void select();
