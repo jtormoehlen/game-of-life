@@ -2,13 +2,12 @@ package controller;
 
 import core.GOL;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  * Created by jtormoehlen on 17.03.2020.
  */
-public class GOLListener implements MouseListener {
+public class GOLListener implements MouseListener, MouseMotionListener, MouseWheelListener {
 
     GOL gol;
 
@@ -18,31 +17,45 @@ public class GOLListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("x: " + e.getX() + " | y: " + e.getY());
-
-        int xWorld = gol.worldValueToArrayValue(e.getX());
-        int yWorld = gol.worldValueToArrayValue(e.getY());
-
-        gol.toggleCell(xWorld, yWorld);
+        try {
+            gol.toggleCell(gol.worldValueToModelValue(e.getX()), gol.worldValueToModelValue(e.getY()));
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            /* ignore */
+        }
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) { }
 
+    @Override
+    public void mouseReleased(MouseEvent e) { }
+
+    @Override
+    public void mouseEntered(MouseEvent e) { }
+
+    @Override
+    public void mouseExited(MouseEvent e) { }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        try {
+            gol.actCell(gol.worldValueToModelValue(e.getX()), gol.worldValueToModelValue(e.getY()));
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            /* ignore */
+        }
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseMoved(MouseEvent e) { }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.getWheelRotation() < 0) {
+            gol.setScale(gol.getScale() * 2);
+            gol.setSize(gol.getSize() / 2);
+        } else if (e.getWheelRotation() > 0) {
+            gol.setScale(gol.getScale() / 2);
+            gol.setSize(gol.getSize() * 2);
+        }
     }
 }
