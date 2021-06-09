@@ -1,32 +1,36 @@
 package controller;
 
+import app.GOLApp;
+import core.GOL;
+import view.GOLDraw;
+import view.GOLFile;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 /**
  * Created by jtormoehlen on 04.06.2021.
  */
 public class GOLButton {
 
-    GOLController golController;
+    private HashMap<String, Object> golContainer;
 
-    boolean isRunning;
+    public GOLButton(HashMap<String, Object> golContainer) {
+        this.golContainer = golContainer;
 
-    public GOLButton(GOLController golController) {
-        this.golController = golController;
-        this.timeControlButton();
-        this.resetButton();
-        this.randomStartButton();
+        timeControlButton();
+        resetButton();
+        randomStartButton();
+        fileButton();
     }
 
-    public void timeControlButton() {
+    private void timeControlButton() {
         JButton timeControlButton = new JButton("Start");
-        golController.controlPanel.add(timeControlButton);
-        golController.controlPanel.setVisible(true);
-        golController.golApp.add(golController.controlPanel, BorderLayout.SOUTH);
+        ((GOLPanel)golContainer.get("golPanel")).add(timeControlButton);
 
         timeControlButton.addActionListener(actionEvent -> {
-            isRunning = !isRunning;
+            ((GOLTimer)golContainer.get("golTimer")).toggleRunning();
 
             if (timeControlButton.getText() == "Start") {
                 timeControlButton.setText("Stopp");
@@ -36,21 +40,30 @@ public class GOLButton {
         });
     }
 
-    public void resetButton() {
+    private void resetButton() {
         JButton resetButton = new JButton("Reset");
-        golController.controlPanel.add(resetButton);
-        golController.controlPanel.setVisible(true);
-        golController.golApp.add(golController.controlPanel, BorderLayout.SOUTH);
+        ((GOLPanel)golContainer.get("golPanel")).add(resetButton);
 
-        resetButton.addActionListener(actionEvent -> golController.gol.initPop(golController.gol.getSize()));
+        resetButton.addActionListener(actionEvent ->
+                ((GOL)golContainer.get("gol")).initPop(((GOL)golContainer.get("gol")).getSize())
+        );
     }
 
-    public void randomStartButton() {
+    private void randomStartButton() {
         JButton randomStartButton = new JButton("Random");
-        golController.controlPanel.add(randomStartButton);
-        golController.controlPanel.setVisible(true);
-        golController.golApp.add(golController.controlPanel, BorderLayout.SOUTH);
+        ((GOLPanel)golContainer.get("golPanel")).add(randomStartButton);
 
-        randomStartButton.addActionListener(actionEvent -> golController.gol.randomStart());
+        randomStartButton.addActionListener(actionEvent ->
+                ((GOL)golContainer.get("gol")).randomStart()
+        );
+    }
+
+    private void fileButton() {
+        JButton fileButton = new JButton("File");
+        ((GOLPanel)golContainer.get("golPanel")).add(fileButton);
+
+        fileButton.addActionListener(actionEvent ->
+                new GOLFile((GOLDraw) golContainer.get("golDraw")).modelToFile("gol")
+        );
     }
 }

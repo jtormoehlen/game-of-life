@@ -1,7 +1,5 @@
 package view;
 
-import core.GOL;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,24 +8,33 @@ import java.awt.*;
  */
 public class GOLWindow extends JPanel {
 
-    GOL gol;
+    private GOLDraw golDraw;
 
-    public GOLWindow(GOL gol) {
-        this.gol = gol;
-        this.setSize(600, 600);
+    public GOLWindow(GOLDraw golDraw) {
+        this.golDraw = golDraw;
+
+        setSize(600, 600);
     }
 
     @Override
     public void paint(Graphics g) {
-        for (int i = 0; i < gol.getPop().length; i++) {
-            for (int j = 0; j < gol.getPop().length; j++) {
-                if (gol.getPop()[i][j]) {
+        for (int i = 0; i < golDraw.getGOL().getPop().length; i++) {
+            for (int j = 0; j < golDraw.getGOL().getPop().length; j++) {
+                if (golDraw.getGOL().getPop()[i][j]) {
                     g.setColor(Color.BLACK);
-                    g.fillRect((i * gol.scale) + gol.offset, (j * gol.scale) + gol.offset, gol.scale, gol.scale);
+                    g.fillRect(
+                            (i * golDraw.getScale()) + golDraw.getOffset(),
+                            (j * golDraw.getScale()) + golDraw.getOffset(),
+                            golDraw.getScale(), golDraw.getScale()
+                    );
                 }
 
                 g.setColor(Color.GRAY);
-                g.drawRect((i * gol.scale) + gol.offset, (j * gol.scale) + gol.offset, gol.scale, gol.scale);
+                g.drawRect(
+                        (i * golDraw.getScale()) + golDraw.getOffset(),
+                        (j * golDraw.getScale()) + golDraw.getOffset(),
+                        golDraw.getScale(), golDraw.getScale()
+                );
             }
         }
     }

@@ -5,8 +5,12 @@ package controller;
  */
 public class GOLTimer {
 
-    long zeroTime;
-    long delayTime = 250;
+    final static long INIT_DELAY_TIME = 250;
+
+    private long zeroTime;
+    private long delayTime = INIT_DELAY_TIME;
+
+    private boolean isRunning;
 
     public void start() {
         zeroTime = System.nanoTime() / 1000000;
@@ -23,5 +27,25 @@ public class GOLTimer {
         do {
             currentTime = getCurrentTime();
         } while ((currentTime - startTime) <= delayTime);
+    }
+
+    public void toggleRunning() {
+        isRunning = !isRunning;
+    }
+
+    public void toggleRunning(boolean isRunning) {
+        this.isRunning = isRunning;
+    }
+
+    public long getDelayTime() {
+        return delayTime;
+    }
+
+    public void setDelayTime(long delayTime) {
+        this.delayTime = delayTime;
+    }
+
+    public boolean getRunning() {
+        return isRunning;
     }
 }

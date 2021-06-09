@@ -23,13 +23,14 @@ public class GOLApp extends JFrame {
     public static void main(String[] args) {
         GOLApp golApp = new GOLApp();
         GOLController golController = new GOLController(golApp);
+
         golApp.setTitle("GameOfLife");
         golApp.setSize(850, 950);
         golApp.setVisible(true);
         golApp.setResizable(false);
 
         try {
-            golController.simulate();
+            new GOLRunner(golController.getGolContainer()).run();
         } catch (InterruptedException interruptedException) {
             interruptedException.printStackTrace();
         }

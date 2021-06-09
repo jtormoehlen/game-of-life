@@ -2,54 +2,83 @@ package controller;
 
 import app.GOLApp;
 import core.GOL;
+import view.GOLDraw;
 import view.GOLWindow;
 
-import javax.swing.*;
+import java.util.HashMap;
 
 /**
  * Created by jtormoehlen on 17.03.2020.
  */
 public class GOLController {
 
-    GOL gol;
-    GOLApp golApp;
-    GOLTimer golTimer;
-    GOLWindow golWindow;
-    GOLButton golButton;
-    GOLSlider golSlider;
-    GOLListener golListener;
-    JPanel controlPanel;
+    private HashMap<String, Object> golContainer;
+
+    private GOL gol;
+    private GOLDraw golDraw;
+    private GOLTimer golTimer;
+    private GOLWindow golWindow;
+    private GOLButton golButton;
+    private GOLSlider golSlider;
+    private GOLListener golListener;
+    private GOLPanel golPanel;
 
     public GOLController(GOLApp golApp) {
-        this.golApp = golApp;
-        this.initController();
+        golContainer = new HashMap<>();
+
+        add("golApp", golApp);
+
+        initWindow();
+        initControls();
+        initListeners();
     }
 
-    public void initController() {
-        gol = new GOL();
+    private void initWindow() {
+        gol = new GOL(80);
+        golDraw = new GOLDraw(gol);
         golTimer = new GOLTimer();
-        controlPanel = new JPanel();
-        golWindow = new GOLWindow(gol);
-        golListener = new GOLListener(gol);
-        golButton = new GOLButton(this);
-        golSlider = new GOLSlider(this);
+        golWindow = new GOLWindow(golDraw);
+
+        add("gol", gol);
+        add("golDraw", golDraw);
+        add("golTimer", golTimer);
+        add("golWindow", golWindow);
+
+        ((GOLApp)get("golApp")).add((GOLWindow)get("golWindow"));
+    }
+
+    private void initControls() {
+        golPanel = new GOLPanel(golContainer);
+
+        add("golPanel", golPanel);
+
+        golButton = new GOLButton(golContainer);
+        golSlider = new GOLSlider(golContainer);
+
+        add("golButton", golButton);
+        add("golSlider", golSlider);
+    }
+
+    private void initListeners() {
+        golListener = new GOLListener(golDraw);
+
         golWindow.setVisible(true);
         golWindow.addMouseListener(golListener);
         golWindow.addMouseMotionListener(golListener);
         golWindow.addMouseWheelListener(golListener);
-        golApp.add(golWindow);
+
+        add("golListener", golListener);
     }
 
-    public void simulate() throws InterruptedException {
-        gol.initPop(80);
-        golTimer.start();
+    public Object get(String golHandlerKey) {
+        return golContainer.get(golHandlerKey);
+    }
 
-        while (true) {
-            if (golButton.isRunning) {
-                gol.select();
-                golTimer.delayTime();
-            }
-            golApp.repaint();
-        }
+    public void add(String golHandlerKey, Object golHandlerType) {
+        golContainer.put(golHandlerKey, golHandlerType);
+    }
+
+    public HashMap<String, Object> getGolContainer() {
+        return golContainer;
     }
 }

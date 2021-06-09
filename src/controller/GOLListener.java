@@ -1,6 +1,6 @@
 package controller;
 
-import core.GOL;
+import view.GOLDraw;
 
 import java.awt.event.*;
 
@@ -9,16 +9,18 @@ import java.awt.event.*;
  */
 public class GOLListener implements MouseListener, MouseMotionListener, MouseWheelListener {
 
-    GOL gol;
+    private GOLDraw golDraw;
 
-    public GOLListener(GOL gol) {
-        this.gol = gol;
+    public GOLListener(GOLDraw golDraw) {
+        this.golDraw = golDraw;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         try {
-            gol.toggleCell(gol.worldValueToModelValue(e.getX()), gol.worldValueToModelValue(e.getY()));
+            golDraw.getGOL().toggleCell(
+                    golDraw.worldToModel(e.getX()), golDraw.worldToModel(e.getY())
+            );
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
             /* ignore */
         }
@@ -39,7 +41,9 @@ public class GOLListener implements MouseListener, MouseMotionListener, MouseWhe
     @Override
     public void mouseDragged(MouseEvent e) {
         try {
-            gol.actCell(gol.worldValueToModelValue(e.getX()), gol.worldValueToModelValue(e.getY()));
+            golDraw.getGOL().toggleCell(
+                    golDraw.worldToModel(e.getX()), golDraw.worldToModel(e.getY()), true
+            );
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
             /* ignore */
         }
@@ -51,11 +55,11 @@ public class GOLListener implements MouseListener, MouseMotionListener, MouseWhe
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (e.getWheelRotation() < 0) {
-            gol.setScale(gol.getScale() * 2);
-            gol.setSize(gol.getSize() / 2);
+            golDraw.setScale(golDraw.getScale() * 2);
+            golDraw.getGOL().setSize(golDraw.getGOL().getSize() / 2);
         } else if (e.getWheelRotation() > 0) {
-            gol.setScale(gol.getScale() / 2);
-            gol.setSize(gol.getSize() * 2);
+            golDraw.setScale(golDraw.getScale() / 2);
+            golDraw.getGOL().setSize(golDraw.getGOL().getSize() * 2);
         }
     }
 }
