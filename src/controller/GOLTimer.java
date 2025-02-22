@@ -13,28 +13,31 @@ public class GOLTimer {
     private boolean isRunning;
 
     public void start() {
-        zeroTime = System.nanoTime() / 1000000;
+        zeroTime = System.currentTimeMillis();
+        isRunning = true;
     }
 
     public long getCurrentTime() {
-        return System.nanoTime() / 1000000;
+        return System.currentTimeMillis();
     }
 
     public void delayTime() {
         long startTime = getCurrentTime();
-        long currentTime;
-
-        do {
-            currentTime = getCurrentTime();
-        } while ((currentTime - startTime) <= delayTime);
+        
+        while (getCurrentTime() - startTime < delayTime) {
+            try {
+                // Put current thread to sleep mode
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                // Reset unterrupt state
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
     }
 
     public void toggleRunning() {
         isRunning = !isRunning;
-    }
-
-    public void toggleRunning(boolean isRunning) {
-        this.isRunning = isRunning;
     }
 
     public long getDelayTime() {
@@ -45,7 +48,7 @@ public class GOLTimer {
         this.delayTime = delayTime;
     }
 
-    public boolean getRunning() {
-        return isRunning;
+    public boolean isRunning() {
+        return !isRunning;
     }
 }

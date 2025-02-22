@@ -20,7 +20,7 @@ public class GOLRunner {
         ((GOLTimer)golContainer.get("golTimer")).start();
 
         while (true) {
-            if (((GOLTimer)golContainer.get("golTimer")).getRunning()) {
+            if (((GOLTimer)golContainer.get("golTimer")).isRunning()) {
                 ((GOL)golContainer.get("gol")).select();
                 ((GOLTimer)golContainer.get("golTimer")).delayTime();
             }
