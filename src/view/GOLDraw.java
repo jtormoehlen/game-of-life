@@ -53,11 +53,12 @@ public class GOLDraw {
             fieldString += "+\n";
 
             for (int j = 0; j < gol.getPop().length; j++) {
-                if (gol.getPop()[j][i]) {
-                    fieldString += "  # ";
-                } else {
-                    fieldString += "    ";
-                }
+                // if (gol.getPop()[j][i]) {
+                //     fieldString += "  # ";
+                // } else {
+                //     fieldString += "    ";
+                // }
+                fieldString += "  " + gol.getNeighborCount(j, i) + " ";
             }
 
             fieldString += "\n";

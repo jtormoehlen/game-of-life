@@ -5,7 +5,7 @@ package controller;
  */
 public class GOLTimer {
 
-    final static long INIT_DELAY_TIME = 250;
+    final static long INIT_DELAY_TIME = 50;
 
     private long zeroTime;
     private long delayTime = INIT_DELAY_TIME;

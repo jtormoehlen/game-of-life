@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class GOLRunner {
 
-    HashMap<String, Object> golContainer;
+    private final HashMap<String, Object> golContainer;
 
     public GOLRunner(HashMap<String, Object> golContainer) {
         this.golContainer = golContainer;

@@ -3,6 +3,8 @@ package app;
 import controller.GOLController;
 
 import javax.swing.*;
+
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

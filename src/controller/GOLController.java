@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class GOLController {
 
-    private HashMap<String, Object> golContainer;
+    private final HashMap<String, Object> golContainer;
 
     private GOL gol;
     private GOLDraw golDraw;
@@ -44,7 +44,7 @@ public class GOLController {
         add("golTimer", golTimer);
         add("golWindow", golWindow);
 
-        ((GOLApp)get("golApp")).add((GOLWindow)get("golWindow"));
+        ((GOLApp)get("golApp")).add(golWindow);
     }
 
     private void initControls() {
@@ -62,12 +62,11 @@ public class GOLController {
     private void initListeners() {
         golListener = new GOLListener(golDraw);
 
-        golWindow.setVisible(true);
+        add("golListener", golListener);
+
         golWindow.addMouseListener(golListener);
         golWindow.addMouseMotionListener(golListener);
         golWindow.addMouseWheelListener(golListener);
-
-        add("golListener", golListener);
     }
 
     public Object get(String golHandlerKey) {

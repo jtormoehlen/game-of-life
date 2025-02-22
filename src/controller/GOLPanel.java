@@ -11,11 +11,7 @@ import java.util.HashMap;
  */
 public class GOLPanel extends JPanel {
 
-    HashMap<String, Object> golContainer;
-
     public GOLPanel(HashMap<String, Object> golContainer) {
-        this.golContainer = golContainer;
-
         setVisible(true);
         ((GOLApp)golContainer.get("golApp")).add(this, BorderLayout.SOUTH);
     }

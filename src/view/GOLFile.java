@@ -1,8 +1,5 @@
 package view;
 
-import core.GOL;
-
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -23,9 +20,8 @@ public class GOLFile {
             fileWriter.write(golDraw.modelToText());
             fileWriter.close();
             System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        } catch (IOException ioException) {
+            System.out.println("File writing error occurred.");
         }
     }
 }

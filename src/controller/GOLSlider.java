@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class GOLSlider {
 
-    private HashMap<String, Object> golContainer;
+    private final HashMap<String, Object> golContainer;
 
     public GOLSlider(HashMap<String, Object> golContainer) {
         this.golContainer = golContainer;
@@ -21,8 +21,10 @@ public class GOLSlider {
         final int TIME_INTERVAL_MAX = 1000;
         final int TIME_INTERVAL_INIT = (int)GOLTimer.INIT_DELAY_TIME;
 
-        JSlider timeInterval = new JSlider(JSlider.HORIZONTAL,
-                TIME_INTERVAL_MIN, TIME_INTERVAL_MAX, TIME_INTERVAL_INIT);
+        JSlider timeInterval = new JSlider(
+                JSlider.HORIZONTAL,
+                TIME_INTERVAL_MIN, TIME_INTERVAL_MAX, TIME_INTERVAL_INIT
+        );
 
         timeInterval.setMajorTickSpacing(200);
         timeInterval.setMinorTickSpacing(50);

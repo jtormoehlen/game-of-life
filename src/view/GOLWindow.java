@@ -14,6 +14,7 @@ public class GOLWindow extends JPanel {
         this.golDraw = golDraw;
 
         setSize(600, 600);
+        setVisible(true);
     }
 
     @Override

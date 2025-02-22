@@ -9,6 +9,8 @@ public interface GameOfLife {
 
     void toggleCell(int x, int y);
 
+    void toggleCell(int x, int y, boolean value);
+
     int getNeighborCount(int x, int y);
 
     void select();
