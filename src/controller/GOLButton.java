@@ -23,15 +23,16 @@ public class GOLButton {
         resetButton();
         randomStartButton();
         fileButton();
+        toFileButton();
     }
 
     private void timeControlButton() {
         JButton timeControlButton = new JButton("Start");
-        ((GOLPanel)golContainer.get("golPanel")).add(timeControlButton);
+        ((GOLPanel) golContainer.get("golPanel")).add(timeControlButton);
         Color defaultColor = timeControlButton.getBackground();
 
         timeControlButton.addActionListener(actionEvent -> {
-            ((GOLTimer)golContainer.get("golTimer")).toggleRunning();
+            ((GOLTimer) golContainer.get("golTimer")).toggleRunning();
 
             if (timeControlButton.getText() == "Start") {
                 timeControlButton.setText("Stopp");
@@ -45,28 +46,32 @@ public class GOLButton {
 
     private void resetButton() {
         JButton resetButton = new JButton("Zurücksetzen");
-        ((GOLPanel)golContainer.get("golPanel")).add(resetButton);
+        ((GOLPanel) golContainer.get("golPanel")).add(resetButton);
 
-        resetButton.addActionListener(actionEvent ->
-                ((GOL)golContainer.get("gol")).initPop(((GOL)golContainer.get("gol")).getSize())
-        );
+        resetButton.addActionListener(
+                actionEvent -> ((GOL) golContainer.get("gol")).initPop(((GOL) golContainer.get("gol")).getSize()));
     }
 
     private void randomStartButton() {
         JButton randomStartButton = new JButton("Zufällig");
-        ((GOLPanel)golContainer.get("golPanel")).add(randomStartButton);
+        ((GOLPanel) golContainer.get("golPanel")).add(randomStartButton);
 
-        randomStartButton.addActionListener(actionEvent ->
-                ((GOL)golContainer.get("gol")).randomStart()
-        );
+        randomStartButton.addActionListener(actionEvent -> ((GOL) golContainer.get("gol")).randomStart());
     }
 
     private void fileButton() {
         JButton fileButton = new JButton("als Datei");
-        ((GOLPanel)golContainer.get("golPanel")).add(fileButton);
+        ((GOLPanel) golContainer.get("golPanel")).add(fileButton);
 
-        fileButton.addActionListener(actionEvent ->
-                new GOLFile((GOLDraw) golContainer.get("golDraw")).modelToFile("gol")
-        );
+        fileButton.addActionListener(
+                actionEvent -> new GOLFile((GOLDraw) golContainer.get("golDraw")).modelToFile("gol"));
+    }
+
+    private void toFileButton() {
+        JButton toFileButton = new JButton("von Datei");
+        ((GOLPanel) golContainer.get("golPanel")).add(toFileButton);
+
+        toFileButton.addActionListener(
+                actionEvent -> new GOLFile((GOLDraw) golContainer.get("golDraw")).fileToModel("config"));
     }
 }

@@ -66,4 +66,8 @@ public class GOLDraw {
 
         return fieldString;
     }
+
+    public void textToModel(boolean[][] config, int dim, int x0, int y0) {
+        gol.setPop(config);
+    } 
 }

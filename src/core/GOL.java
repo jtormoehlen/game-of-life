@@ -184,4 +184,8 @@ public class GOL implements GameOfLife {
     public boolean[][] getPop() {
         return pop;
     }
+
+    public void setPop(boolean[][] config) {
+        pop = config;
+    }
 }
