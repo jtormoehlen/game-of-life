@@ -20,11 +20,12 @@ public class GOLController {
     private GOLWindow golWindow;
     private GOLButton golButton;
     private GOLSlider golSlider;
+    private GOLTextField golTextField;
     private GOLListener golListener;
     private GOLPanel golPanel;
 
     public GOLController(GOLApp golApp) {
-        golContainer = new HashMap<>();
+        golContainer = new HashMap<String, Object>();
 
         add("golApp", golApp);
 
@@ -34,7 +35,7 @@ public class GOLController {
     }
 
     private void initWindow() {
-        gol = new GOL(80);
+        gol = new GOL(50);
         golDraw = new GOLDraw(gol);
         golTimer = new GOLTimer();
         golWindow = new GOLWindow(golDraw);
@@ -44,7 +45,7 @@ public class GOLController {
         add("golTimer", golTimer);
         add("golWindow", golWindow);
 
-        ((GOLApp)get("golApp")).add(golWindow);
+        ((GOLApp) get("golApp")).add(golWindow);
     }
 
     private void initControls() {
@@ -54,9 +55,11 @@ public class GOLController {
 
         golButton = new GOLButton(golContainer);
         golSlider = new GOLSlider(golContainer);
+        golTextField = new GOLTextField(golContainer);
 
         add("golButton", golButton);
         add("golSlider", golSlider);
+        // add("golTextField", golTextField);
     }
 
     private void initListeners() {

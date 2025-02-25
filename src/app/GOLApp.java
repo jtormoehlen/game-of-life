@@ -27,7 +27,7 @@ public class GOLApp extends JFrame {
         GOLController golController = new GOLController(golApp);
 
         golApp.setTitle("GameOfLife");
-        golApp.setSize(500, 600);
+        golApp.setSize(700, 700);
         golApp.setVisible(true);
         golApp.setResizable(true);
 

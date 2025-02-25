@@ -19,7 +19,7 @@ public class GOLSlider {
     private void timeIntervalSlider() {
         final int TIME_INTERVAL_MIN = 0;
         final int TIME_INTERVAL_MAX = 1000;
-        final int TIME_INTERVAL_INIT = (int)GOLTimer.INIT_DELAY_TIME;
+        final int TIME_INTERVAL_INIT = (int)GOLTimer.INIT_TIME_DELAY;
 
         JSlider timeInterval = new JSlider(
                 JSlider.HORIZONTAL,

@@ -5,10 +5,10 @@ package controller;
  */
 public class GOLTimer {
 
-    final static long INIT_DELAY_TIME = 50;
+    final static long INIT_TIME_DELAY = 50;
 
     private long zeroTime;
-    private long delayTime = INIT_DELAY_TIME;
+    private long delayTime = INIT_TIME_DELAY;
 
     private boolean isRunning;
 
@@ -23,11 +23,11 @@ public class GOLTimer {
 
     public void delayTime() {
         long startTime = getCurrentTime();
-        
+
         while (getCurrentTime() - startTime < delayTime) {
             try {
                 // Put current thread to sleep mode
-                Thread.sleep(1);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 // Reset unterrupt state
                 Thread.currentThread().interrupt();
