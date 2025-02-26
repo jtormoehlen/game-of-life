@@ -166,7 +166,7 @@ public class GOL implements GameOfLife {
     }
 
     public void setSize(int size) {
-        if (size >= 10 && size <= 100) {
+        if (size >= 8 && size <= 128) {
             boolean[][] temp = new boolean[size][size];
 
             for (int i = 0; i < temp.length; i++) {
@@ -185,7 +185,13 @@ public class GOL implements GameOfLife {
         return pop;
     }
 
-    public void setPop(boolean[][] config) {
-        pop = config;
+    public void setPop(boolean[][] pop, int dx, int dy) {
+        initPop(getPop().length);
+
+        for (int i = 0; i < pop.length; i++) {
+            for (int j = 0; j < pop.length; j++) {
+                this.pop[i + dx][j + dy] = pop[i][j];
+            }
+        }
     }
 }

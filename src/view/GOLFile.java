@@ -34,28 +34,27 @@ public class GOLFile {
             Scanner scanner = new Scanner(file);
 
             String dimLine = scanner.nextLine();
-            String xLine = scanner.nextLine();
-            String yLine = scanner.nextLine();
+            String[] coords = scanner.nextLine().trim().split(" ");
 
-            int dim = Integer.parseInt(dimLine.trim());
-            int x0 = Integer.parseInt(xLine.trim());
-            int y0 = Integer.parseInt(yLine.trim());
+            int n = Integer.parseInt(dimLine.trim());
+            int dx = Integer.parseInt(coords[0]);
+            int dy = Integer.parseInt(coords[1]);
 
-            boolean[][] config = new boolean[dim][dim];
+            boolean[][] pop = new boolean[n][n];
 
             int i = 0;
             while (scanner.hasNextLine()) {
                 String[] configLine = scanner.nextLine().trim().split(" ");
 
                 for (int j = 0; j < configLine.length; j++) {
-                    config[j][i] = Boolean.parseBoolean(configLine[j]);
+                    pop[j][i] = Integer.parseInt(configLine[j]) != 0;
                 }
 
                 i++;
             }
             scanner.close();
 
-            golDraw.textToModel(config, dim, x0, y0);
+            golDraw.textToModel(pop, dx, dy);
 
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("An error occurred.");

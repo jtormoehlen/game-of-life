@@ -35,7 +35,7 @@ public class GOLController {
     }
 
     private void initWindow() {
-        gol = new GOL(50);
+        gol = new GOL(64);
         golDraw = new GOLDraw(gol);
         golTimer = new GOLTimer();
         golWindow = new GOLWindow(golDraw);
