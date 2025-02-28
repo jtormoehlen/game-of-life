@@ -20,7 +20,7 @@ public class GOLController {
     private GOLWindow golWindow;
     private GOLButton golButton;
     private GOLSlider golSlider;
-    private GOLTextField golTextField;
+    private GOLComboBox golComboBox;
     private GOLListener golListener;
     private GOLPanel golPanel;
 
@@ -55,7 +55,7 @@ public class GOLController {
 
         golButton = new GOLButton(golContainer);
         golSlider = new GOLSlider(golContainer);
-        golTextField = new GOLTextField(golContainer);
+        golComboBox = new GOLComboBox(golContainer);
 
         add("golButton", golButton);
         add("golSlider", golSlider);

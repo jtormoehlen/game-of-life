@@ -2,15 +2,20 @@ package core;
 
 import java.util.Random;
 
+import core.random.GOLRandom;
+import core.random.NeumannNeighborhood;
+
 /**
  * Created by jtormoehlen on 16.03.2020.
  */
 public class GOL implements GameOfLife {
 
     private boolean[][] pop;
+    private byte randomMode;
 
     public GOL(int size) {
         initPop(size);
+        randomMode = (byte) 127;
     }
 
     public void initPop(int size) {
@@ -87,35 +92,22 @@ public class GOL implements GameOfLife {
     public void randomStart() {
         initPop(this.getSize());
 
-        Random random = new Random();
-        double paramA = .01d;
-        double paramAA = .50d;
-        double probability;
+        GOLRandom golRandom = new GOLRandom(this);
 
-        for (int i = 0; i < pop.length; i++) {
-            for (int j = 0; j < pop.length; j++) {
-                probability = random.nextDouble();
-
-                try {
-                    if (!pop[i - 1][j] && !pop[i][j - 1]) {
-                        if (probability <= paramA) {
-                            pop[i][j] = true;
-                        }
-                    } else {
-                        if (probability <= paramAA) {
-                            pop[i][j] = true;
-                        }
-                    }
-                } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) { }
-            }
-        }
-
-        for (int i = 0; i < pop.length; i++) {
-            for (int j = 0; j < pop.length; j++) {
-                if (getNeighborCount(i, j) <= 2) {
-                    pop[i][j] = false;
-                }
-            }
+        switch (randomMode) {
+            case 0:
+                boolean[][] randomPop = new NeumannNeighborhood(pop, 0.1).singleRandomPop();
+                setPop(randomPop, 0, 0);
+                break;
+            case 1:
+                golRandom.clustering();
+                break;
+            case 2:
+                golRandom.simplexNoise();
+                break;
+            case 3:
+                golRandom.neumann();
+                break;
         }
     }
 
@@ -190,8 +182,12 @@ public class GOL implements GameOfLife {
 
         for (int i = 0; i < pop.length; i++) {
             for (int j = 0; j < pop.length; j++) {
-                this.pop[i + dx][j + dy] = pop[i][j];
+                this.pop[i + dy][j + dx] = pop[i][j];
             }
         }
+    }
+
+    public void setRandomMode(byte randomMode) {
+        this.randomMode = randomMode;
     }
 }

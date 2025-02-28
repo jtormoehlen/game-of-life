@@ -47,7 +47,7 @@ public class GOLFile {
                 String[] configLine = scanner.nextLine().trim().split(" ");
 
                 for (int j = 0; j < configLine.length; j++) {
-                    pop[j][i] = Integer.parseInt(configLine[j]) != 0;
+                    pop[i][j] = Integer.parseInt(configLine[j]) != 0;
                 }
 
                 i++;
@@ -57,8 +57,7 @@ public class GOLFile {
             golDraw.textToModel(pop, dx, dy);
 
         } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("An error occurred.");
-            fileNotFoundException.printStackTrace();
+            System.out.println("File not found!");
         }
     }
 }

@@ -20,8 +20,6 @@ public class GOLTextField {
 
         JTextField probs = new JTextField(16);
 
-        ((GOLPanel) golContainer.get("golPanel")).add(probs);
-
         probs.addActionListener(changeEvent -> {
             String content = probs.getText();
             float prob = Float.parseFloat(content);

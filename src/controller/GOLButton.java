@@ -61,7 +61,7 @@ public class GOLButton {
 
     private void fileButton() {
         JButton fileButton = new JButton("als Datei");
-        ((GOLPanel) golContainer.get("golPanel")).add(fileButton);
+        // ((GOLPanel) golContainer.get("golPanel")).add(fileButton);
 
         fileButton.addActionListener(
                 actionEvent -> new GOLFile((GOLDraw) golContainer.get("golDraw")).modelToFile("gol"));
