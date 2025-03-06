@@ -15,7 +15,7 @@ public class GOL implements GameOfLife {
 
     public GOL(int size) {
         initPop(size);
-        randomMode = (byte) 127;
+        randomMode = (byte) Byte.MIN_VALUE;
     }
 
     public void initPop(int size) {
@@ -32,36 +32,26 @@ public class GOL implements GameOfLife {
 
     public int getNeighborCount(int x, int y) {
         int count = 0;
-
-        for (int i = x - 1; i <= x + 1; i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
-                int k = i;
-                int l = j;
-
-                if (k == -1) {
-                    k = pop.length - 1;
+        int rows = pop.length;
+        int cols = pop[0].length;
+    
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) {
+                    // Ignore edged cell
+                    continue;
                 }
-
-                if (k == pop.length) {
-                    k = 0;
-                }
-
-                if (l == -1) {
-                    l = pop.length - 1;
-                }
-
-                if (l == pop.length) {
-                    l = 0;
-                }
-
-                if (!(k == x && l == y)) {
-                    if (pop[k][l]) {
-                        count++;
-                    }
+    
+                // Berechne die Nachbarn unter Berücksichtigung der Zyklen
+                int k = (x + i + rows) % rows; // Wickel um die Zeilen
+                int l = (y + j + cols) % cols; // Wickel um die Spalten
+    
+                if (pop[k][l]) {
+                    count++;
                 }
             }
         }
-
+    
         return count;
     }
 
@@ -107,6 +97,9 @@ public class GOL implements GameOfLife {
                 break;
             case 3:
                 golRandom.neumann();
+                break;
+            default:
+                System.out.println("No option for randomizer chosen!");
                 break;
         }
     }
@@ -158,7 +151,7 @@ public class GOL implements GameOfLife {
     }
 
     public void setSize(int size) {
-        if (size >= 8 && size <= 128) {
+        if (size >= 8 && size <= 64) {
             boolean[][] temp = new boolean[size][size];
 
             for (int i = 0; i < temp.length; i++) {
