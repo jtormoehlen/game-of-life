@@ -27,15 +27,17 @@ public class GOLRandom {
     }
 
     public void simplexNoise() {
-        double frequency = 0.02; // Anpassbare Frequenz des Rauschens
-        double threshold = 0.5;  // Schwellenwert für die Umwandlung in Boolean
+        // Noise frequency
+        double frequency = 0.02;
+        // Hieght mapping threshold
+        double threshold = 0.5;
 
         SimplexNoise simplexNoise = new SimplexNoise();
         double[][] noise = simplexNoise.generateNoise(gol.getSize(), gol.getSize(), frequency);
 
         for (int x = 0; x < gol.getSize(); x++) {
             for (int y = 0; y < gol.getSize(); y++) {
-                gol.getPop()[x][y] = noise[x][y] > threshold; // Füllt das Array basierend auf einem Schwellenwert
+                gol.getPop()[x][y] = noise[x][y] > threshold;
             }
         }
     }
@@ -60,7 +62,9 @@ public class GOLRandom {
                             gol.getPop()[i][j] = true;
                         }
                     }
-                } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) { }
+                } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) { 
+                    /* do nothing */
+                }
             }
         }
 

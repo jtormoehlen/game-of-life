@@ -31,7 +31,7 @@ public class GOLSlider {
         timeInterval.setPaintTicks(true);
         timeInterval.setPaintLabels(true);
         timeInterval.setSnapToTicks(true);
-        timeInterval.setToolTipText("Zeitintervall / ms");
+        timeInterval.setToolTipText("Time interval / ms");
 
         ((GOLPanel)golContainer.get("golPanel")).add(timeInterval);
 

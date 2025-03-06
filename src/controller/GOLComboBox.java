@@ -24,6 +24,9 @@ public class GOLComboBox {
 
         patternComboBox.addItemListener(itemEvent -> {
             switch (itemEvent.getItem().toString()) {
+                case "Choose Pattern...":
+                    ((GOL) golContainer.get("gol")).setRandomMode((byte) Byte.MIN_VALUE);
+                    break;
                 case "Single random":
                     ((GOL) golContainer.get("gol")).setRandomMode((byte) 0);
                     break;

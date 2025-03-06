@@ -4,14 +4,18 @@
 
 ## Übersicht
 
-Die "Game of Life"-Anwendung ist eine interaktive Implementierung des berühmten zellulären Automaten, der von dem Mathematiker John Conway entwickelt wurde. In dieser Anwendung können Benutzer Zellen in einem Gitter anklicken, um sie als lebendig oder tot zu klassifizieren. Es gibt Funktionen zum Starten und Stoppen der Simulation sowie zur Anpassung der Geschwindigkeit der Entwicklungsschritte. Zudem können zufällige Populationen erzeugt werden, wobei Cluster mit unterschiedlichen Wahrscheinlichkeiten für lebende Zellen genutzt werden.
+Die "Game of Life"-Anwendung ist eine interaktive Implementierung des berühmten zellulären Automaten, der von dem Mathematiker John Conway entwickelt wurde. In dieser Anwendung können Benutzer Zellen in einem Gitter anklicken, um sie als lebendig oder tot zu klassifizieren. Es gibt Funktionen zum Starten und Stoppen der Simulation sowie zur Anpassung der Geschwindigkeit der Entwicklungsschritte. Zudem können zufällige Populationen erzeugt werden, wobei verschiedene Kernel zur Generierung verwendet werden können.
 
 ## Funktionen
 
 - **Interaktive Zellenauswahl**: Klicken Sie auf Zellen im Gitter, um ihren Status zu ändern (lebendig oder tot).
 - **Simulation Starten/Stoppen**: Starten oder stoppen Sie die Simulation mit einem Button.
 - **Geschwindigkeit Einstellen**: Passen Sie die Geschwindigkeit der Simulation in Millisekunden (ms) an.
-- **Zufällige Populationen**: Erzeugen Sie zufällige Populationen mit einer höheren Wahrscheinlichkeit für Cluster lebender Zellen.
+- **Zufällige Populationen**: Erzeugen Sie zufällige Populationen:
+   - **Single random**: Einfache unbedingte Wahrscheinlichkeit mit Dichte.
+   - **Clustering**: Höhere Wahrscheinlichkeit für Cluster lebender Zellen.
+   - **Simplex noise**: $n$-dimensionales Rauschen mit spezifischer Funktion.
+   - **Neumann neighborhood**: Höhere Wahrscheinlichkeit für Cluster von Neumann-Nachbarschaften.
 
 ## Installation
 
@@ -41,9 +45,9 @@ Die "Game of Life"-Anwendung ist eine interaktive Implementierung des berühmten
 1. **Einstellen der Zellen**: Klicken Sie auf Zellen im Gitter, um sie zu aktivieren oder zu deaktivieren.
 2. **Simulation starten**: Drücken Sie den "Start"-Button, um die Simulation zu beginnen. Drücken Sie erneut (Stop), um sie zu stoppen.
 3. **Geschwindigkeit anpassen**: Stellen Sie die gewünschte Zeit in Millisekunden eines Evolutionsschrittes mit dem Slider ein.
-4. **Zufällige Bevölkerung erzeugen**: Klicken Sie auf den Button "Zufällig", um ein zufälliges Zellmuster zu erzeugen.
+4. **Zufällige Bevölkerung erzeugen**: Klicken Sie auf den Button "Random", um ein zufälliges Zellmuster zu erzeugen, wobei ein Kernel aus der ComboBox ausgewählt werden kann.
 5. **Feld zurücksetzen**: Klicken Sie auf Zurücksetzen, um alle Zellen des Feldes auf tot zu stellen.
-6. **Aktuelle Population drucken**: Sie können die Population der neuesten Generation mit dem Button "als Datei" in `gol.txt` speichern.
+6. **Population einlesen**: Sie können die Population einer Generation mit dem Button "from file" aus `config.txt` importieren.
 
 ## Beispielansicht
 

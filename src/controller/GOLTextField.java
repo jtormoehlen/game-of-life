@@ -20,7 +20,7 @@ public class GOLTextField {
 
         JTextField probs = new JTextField(16);
 
-        probs.addActionListener(changeEvent -> {
+        probs.addActionListener(_ -> {
             String content = probs.getText();
             float prob = Float.parseFloat(content);
             System.out.println("" + prob);

@@ -67,7 +67,7 @@ public class NeumannNeighborhood {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Array bounds reached!");
+            System.out.println("Array bounds reached!");
         }
 
         return pop;
